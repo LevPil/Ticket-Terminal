@@ -16,4 +16,15 @@ public class Payment {
         System.out.printf("Price with discount %.2f rubles | Points awarded: %.0f%n", discountedPrice, bonusPoints);
         return discountedPrice;
     }
+    public double applyPointsDiscount(double price, int pointsInAccount, int pointsToSpend) {
+        if (pointsToSpend < 0) {
+            throw new IllegalArgumentException("Error! Points cannot be negative!");
+        }
+        if (pointsToSpend > pointsInAccount) {
+            throw new IllegalArgumentException("Error! Not enough points!");
+        }
+        double points = pointsToSpend;
+        double finalPrice = price - points;
+        return Math.max(finalPrice, 0);
+    }
 }
