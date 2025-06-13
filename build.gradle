@@ -18,11 +18,12 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
 publishing {
     publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-            artifactId = "theater-ticket-system"
+        mavenJava(MavenPublication) {
+            from(components.java)
+            artifactId = 'theater-ticket-system'
         }
     }
     repositories {
