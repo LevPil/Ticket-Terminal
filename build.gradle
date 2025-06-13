@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group = 'org.example'
@@ -16,4 +17,22 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+            artifactId = "theater-ticket-system"
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/LevPil/Ticket-Terminal")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
 }
